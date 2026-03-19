@@ -1,10 +1,10 @@
 package gestor;
 
-import ejercicios.Gestor_Pedidos.dao.PedidosDAO;
-import ejercicios.Gestor_Pedidos.exception.ServiceException;
-import ejercicios.Gestor_Pedidos.service.PedidosService;
-import ejercicios.Gestor_Pedidos.util.Console;
-import ejercicios.Gestor_Pedidos.util.DataBaseConexion;
+import dao.PedidosDAO;
+import exception.ServiceException;
+import service.PedidosService;
+import util.Console;
+import util.DataBaseConexion;
 
 import java.sql.Connection;
 import java.sql.SQLException;

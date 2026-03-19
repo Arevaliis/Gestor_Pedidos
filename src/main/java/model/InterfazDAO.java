@@ -1,6 +1,6 @@
 package model;
 
-import ejercicios.Gestor_Pedidos.exception.DAOException;
+import exception.DAOException;
 
 import java.util.List;
 

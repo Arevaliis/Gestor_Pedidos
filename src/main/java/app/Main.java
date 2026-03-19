@@ -1,7 +1,7 @@
 package app;
 
-import ejercicios.Gestor_Pedidos.gestor.GestorPedidos;
-import ejercicios.Gestor_Pedidos.util.Console;
+import gestor.GestorPedidos;
+import util.Console;
 
 import java.util.Scanner;
 

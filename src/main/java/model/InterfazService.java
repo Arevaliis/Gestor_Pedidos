@@ -1,6 +1,6 @@
 package model;
 
-import ejercicios.Gestor_Pedidos.exception.ServiceException;
+import exception.ServiceException;
 
 import java.util.List;
 import java.util.Optional;

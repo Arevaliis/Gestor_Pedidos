@@ -1,11 +1,11 @@
 package service;
 
-import ejercicios.Gestor_Pedidos.dao.PedidosDAO;
-import ejercicios.Gestor_Pedidos.exception.DAOException;
-import ejercicios.Gestor_Pedidos.exception.ServiceException;
-import ejercicios.Gestor_Pedidos.model.InterfazService;
-import ejercicios.Gestor_Pedidos.model.Pedido;
-import ejercicios.Gestor_Pedidos.util.Console;
+import dao.PedidosDAO;
+import exception.DAOException;
+import exception.ServiceException;
+import model.InterfazService;
+import model.Pedido;
+import util.Console;
 
 import java.util.List;
 import java.util.Optional;

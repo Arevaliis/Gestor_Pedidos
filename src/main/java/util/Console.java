@@ -1,6 +1,6 @@
 package util;
 
-import ejercicios.Gestor_Pedidos.model.Pedido;
+import model.Pedido;
 
 import java.util.Scanner;
 

@@ -1,8 +1,8 @@
 package dao;
 
-import ejercicios.Gestor_Pedidos.exception.DAOException;
-import ejercicios.Gestor_Pedidos.model.InterfazDAO;
-import ejercicios.Gestor_Pedidos.model.Pedido;
+import exception.DAOException;
+import model.InterfazDAO;
+import model.Pedido;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
