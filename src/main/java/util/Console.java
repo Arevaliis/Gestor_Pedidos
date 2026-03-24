@@ -1,5 +1,6 @@
 package util;
 
+import exception.ServiceException;
 import model.Pedido;
 
 import java.util.Scanner;
@@ -21,7 +22,7 @@ public class Console {
         return respuesta.equals("S");
     }
 
-    public Pedido ingresarPedido(){
+    public Pedido ingresarPedido() throws ServiceException {
         return new Pedido(
                 ingresarPalabra("Ingrese el nombre del cliente: "),
                 ingresarPalabra("Ingrese el producto: "),
@@ -29,18 +30,20 @@ public class Console {
                 ingresarDecimal("Ingrese el precio unitario del producto: "));
     }
 
-    private String ingresarPalabra(String mensaje){
+    // TODO DEBEMOS CAMBIAR EL METODO YA QUE NO PASAREMOS NOMBRE NI DE CLIENTE NI DE PRODUCTO AL SER UN FK
+
+    private String ingresarPalabra(String mensaje) throws ServiceException {
         System.out.print(mensaje);
-        return scanner.nextLine();
+        return Verificador.verificarPalabra(scanner.nextLine().trim().toLowerCase());
     }
 
     public int ingresarNumero(String mensaje){
         System.out.print(mensaje);
-        return Integer.parseInt(scanner.nextLine());
+        return Verificador.verificarNumeroIngresado(scanner.nextLine().trim());
     }
 
     private double ingresarDecimal(String mensaje) {
         System.out.print(mensaje);
-        return Double.parseDouble(scanner.nextLine());
+        return Verificador.verificarDecimalIngresado(scanner.nextLine().trim());
     }
 }

@@ -43,7 +43,7 @@ public class PedidosService implements InterfazService<Pedido> {
     public void eliminar(int id) throws ServiceException {
         try {
 
-            pedidosDAO.eliminar(console.ingresarNumero("Ingrese el ID del pedido: "));
+            pedidosDAO.eliminar(id);
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo eliminar el pedido debido a un error.", e); }
     }

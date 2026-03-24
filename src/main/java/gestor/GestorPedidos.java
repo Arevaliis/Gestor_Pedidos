@@ -27,7 +27,7 @@ public class GestorPedidos {
                     seguir = console.continuarGestorPedidos("¿Desea seguir en la sección de pedidos? S/N: ");
 
                 } catch (NumberFormatException e) { System.err.println("Por favor, ingrese un número.");
-                } catch (ServiceException e) { System.out.println(e.getMessage()); }
+                } catch (ServiceException e) { System.err.println(e.getMessage()); }
             }
 
         } catch (SQLException e) { System.err.println("Error en la conexión a la base de datos: " + e.getMessage()); }
@@ -43,10 +43,10 @@ public class GestorPedidos {
                 2. Ver pedido por ID
                 3. Listar todos los pedidos
                 4. Modificar pedido
-                5. Cancelar pedido
+                5. Eliminar pedido
                 0. Salir
             
-            Seleccione una opción del 0 al 3:  """;
+            Seleccione una opción del 0 al 5:  """;
     }
 
     private static void ejecutarOpcion(PedidosService pedidosService, int opc, Console console) throws ServiceException {

@@ -5,7 +5,10 @@ import util.Console;
 
 import java.util.Scanner;
 
+// TODO CLIENTE (tabla bbdd-model-gestor-dao-service)
+// TODO PRODUCTOS (tabla bbdd-model-gestor-dao-service)
 // TODO CUANDO TENGA LAS TABLAS DE PRODUCTOS Y CLIENTES MODIFICAR EL DAO DE PEDIDOS
+// TODO CAMBIAR CONSOLE Y VERIFICADOR METODOS RELACIONADOS CON NOMBRE CLIENTE Y PEDIDOS YA QUE NO DEBEMOS INGRESAR UN NOMBRE SI NO UNA FK
 
 public class Main {
     public static void main(String[] args) {
@@ -15,7 +18,7 @@ public class Main {
         while (seguir) {
             try {
 
-                if (ejecutarOpcion(console) == 0) { return; }
+                if (ejecutarOpcion(console) == 0 ) { return; }
                 seguir = console.continuarGestorPedidos("¿Desea seguir en el gestor? S/N: ");
 
             } catch (NumberFormatException e) { System.err.println("Por favor, ingrese un número.");
