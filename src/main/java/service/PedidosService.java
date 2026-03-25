@@ -11,14 +11,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PedidosService implements InterfazService<Pedido> {
+    private final PedidosDAO pedidosDAO;
 
-    public final PedidosDAO pedidosDAO;
-    public final Console console;
-
-    public PedidosService(PedidosDAO pedidosDAO, Console console) {
-        this.pedidosDAO = pedidosDAO;
-        this.console = console;
-    }
+    public PedidosService(PedidosDAO pedidosDAO) { this.pedidosDAO = pedidosDAO; }
 
     public void insertar(Pedido pedido) throws ServiceException{
 
@@ -29,7 +24,6 @@ public class PedidosService implements InterfazService<Pedido> {
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo insertar el pedido debido a un error.", e); }
     }
 
-    @Override
     public void modificar(int id, int cantidad) throws ServiceException{
         try {
 
@@ -66,7 +60,7 @@ public class PedidosService implements InterfazService<Pedido> {
     public Optional<Pedido> buscarPorId(int id) throws ServiceException {
         try {
 
-            Optional<Pedido> pedido = pedidosDAO.listarPorId(id);
+            Optional<Pedido> pedido = pedidosDAO.buscarPorID(id);
             if (pedido.isEmpty()) { throw new ServiceException("No existe el pedido con id: "+ id); }
 
             return pedido;

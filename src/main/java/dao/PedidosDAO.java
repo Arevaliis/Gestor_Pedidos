@@ -29,9 +29,9 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
             insert.setDouble(4, pedido.getPrecio());
 
             int filas = insert.executeUpdate();
-            if (filas == 0) { throw new DAOException("DAO: No se ha completado la inserción"); }
+            if (filas == 0) { throw new DAOException("DAO: No se ha completado la inserción del pedido"); }
 
-        }catch (SQLException e){ throw new DAOException("DAO: Error en el insert, revise la consulta o los datos.", e); }
+        }catch (SQLException e){ throw new DAOException("DAO: Error en el insert de pedidos, revise la consulta o los datos.", e); }
     }
 
     @Override
@@ -44,10 +44,9 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
             int filas = delete.executeUpdate();
             if (filas == 0) { throw new DAOException("DAO: No se ha completado la eliminacion del pedido"); }
 
-        }catch (SQLException e){ throw new DAOException("DAO: Error en el delete, revise la consulta o los datos.", e); }
+        }catch (SQLException e){ throw new DAOException("DAO: Error en el delete de pedidos, revise la consulta o los datos.", e); }
     }
 
-    @Override
     public void modificar(int id, int cantidad) throws DAOException {
         String sql = "UPDATE pedidos SET cantidad = ? WHERE id = ?";
 
@@ -58,7 +57,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
             int filas = update.executeUpdate();
             if (filas == 0) { throw new DAOException("DAO: No se ha completado la modificación de la cantidad de pedido"); }
 
-        }catch (SQLException e){ throw new DAOException("DAO: Error en el update, revise la consulta o los datos.", e); }
+        }catch (SQLException e){ throw new DAOException("DAO: Error en el update de pedidos, revise la consulta o los datos.", e); }
     }
 
     @Override
@@ -87,7 +86,8 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
         return pedidos;
     }
 
-    public Optional<Pedido> listarPorId(int id) throws DAOException{
+    @Override
+    public Optional<Pedido> buscarPorID(int id) throws DAOException{
         String sql = "SELECT * FROM pedidos WHERE id = ?";
         Pedido pedido;
 
@@ -106,7 +106,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
                         resultado.getDouble("precio")
                 );
             }
-        }catch (SQLException e){ throw new DAOException("DAO: Error al buscar por ID, revise la consulta o los datos.", e); }
+        }catch (SQLException e){ throw new DAOException("DAO: Error al buscar por ID de pedidos, revise la consulta o los datos.", e); }
 
         return Optional.of(pedido);
     }

@@ -15,7 +15,7 @@ public class GestorPedidos {
         boolean seguir = true;
 
         try (Connection connection = DataBaseConexion.getConnection()) {
-            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection), console);
+            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection));
 
             while (seguir) {
                 try {

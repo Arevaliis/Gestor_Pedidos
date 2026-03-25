@@ -1,5 +1,6 @@
 package app;
 
+import gestor.GestorClientes;
 import gestor.GestorPedidos;
 import util.Console;
 
@@ -45,7 +46,7 @@ public class Main {
 
         switch (opc){
             case 1 -> GestorPedidos.ejecutarGestorPedidos(console);
-            case 2 -> System.out.println("e");
+            case 2 -> GestorClientes.ejecutarGestorClientes(console);
             case 3 -> System.out.println("d");
 
 

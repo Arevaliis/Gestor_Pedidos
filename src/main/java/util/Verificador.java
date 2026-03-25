@@ -27,4 +27,12 @@ public class Verificador {
 
         return Double.parseDouble(opc);
     }
+
+    public static String verificarEmail(String email) throws ServiceException {
+
+        if (email.isEmpty()){throw new ServiceException("Debe ingresar un email. No puede dejar el campo vacío.");}
+        if (!email.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")){throw new ServiceException("El formato del email no es correcto.");}
+
+        return email;
+    }
 }
