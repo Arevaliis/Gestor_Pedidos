@@ -4,13 +4,31 @@ import java.util.Objects;
 
 public class Pedido {
     private int id;
-    private final String cliente;
+    private int clienteID;
+    private Cliente cliente;
     private final String producto;
     private final int cantidad;
     private final double precio;
     private final double precioTotal;
 
-    public Pedido(int id, String cliente, String producto, int cantidad, double precio) {
+    public Pedido(int id, int clienteID, String producto, int cantidad, double precio) {
+        this.id = id;
+        this.clienteID = clienteID;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.precioTotal = cantidad * precio;
+    }
+
+    public Pedido(int clienteID, String producto, int cantidad, double precio) {
+        this.clienteID = clienteID;
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.precio = precio;
+        this.precioTotal = cantidad * precio;
+    }
+
+    public Pedido(int id, Cliente cliente, String producto, int cantidad, double precio) {
         this.id = id;
         this.cliente = cliente;
         this.producto = producto;
@@ -19,7 +37,7 @@ public class Pedido {
         this.precioTotal = cantidad * precio;
     }
 
-    public Pedido(String cliente, String producto, int cantidad, double precio) {
+    public Pedido(Cliente cliente, String producto, int cantidad, double precio) {
         this.cliente = cliente;
         this.producto = producto;
         this.cantidad = cantidad;
@@ -31,9 +49,7 @@ public class Pedido {
         return id;
     }
 
-    public String getCliente() {
-        return cliente;
-    }
+    public int getClienteID() { return clienteID; }
 
     public String getProducto() {
         return producto;
@@ -41,10 +57,6 @@ public class Pedido {
 
     public double getPrecio() {
         return precio;
-    }
-
-    public double getPrecioTotal() {
-        return precioTotal;
     }
 
     public int getCantidad() {

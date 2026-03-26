@@ -1,25 +1,30 @@
 package service;
 
+import dao.ClientesDAO;
 import dao.PedidosDAO;
 import exception.DAOException;
 import exception.ServiceException;
+import model.Cliente;
 import model.InterfazService;
 import model.Pedido;
-import util.Console;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class PedidosService implements InterfazService<Pedido> {
     private final PedidosDAO pedidosDAO;
+    private final ClientesDAO clienteDAO;
 
-    public PedidosService(PedidosDAO pedidosDAO) { this.pedidosDAO = pedidosDAO; }
+    public PedidosService(PedidosDAO pedidosDAO, ClientesDAO clientesDAO) {
+        this.pedidosDAO = pedidosDAO;
+        this.clienteDAO = clientesDAO;
+    }
 
     public void insertar(Pedido pedido) throws ServiceException{
 
         try{
 
-            pedidosDAO.insertar(pedido); // TODO DEBEREMOS MODIFICAR LA PARTE DE EL CLIENTE Y PRODUCTO
+            pedidosDAO.insertar(pedido); // TODO DEBEREMOS MODIFICAR LA PARTE DE PRODUCTO
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo insertar el pedido debido a un error.", e); }
     }
@@ -27,7 +32,7 @@ public class PedidosService implements InterfazService<Pedido> {
     public void modificar(int id, int cantidad) throws ServiceException{
         try {
 
-            if (cantidad < 0){ throw new ServiceException("La cantidad ingresada no puede ser menor de 1."); }
+            if (cantidad <= 0){ throw new ServiceException("La cantidad ingresada no puede ser menor de 1."); }
             pedidosDAO.modificar(id, cantidad);
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo modificar el pedido debido a un error.", e); }
@@ -46,10 +51,22 @@ public class PedidosService implements InterfazService<Pedido> {
     public List<Pedido> listarTodos() throws ServiceException{
 
         try {
+            List<Pedido> pedidos_ID = pedidosDAO.listar();
+            if (pedidos_ID.isEmpty()) { throw new ServiceException("No hay pedidos registrados en la base de datos"); }
 
-            List<Pedido> pedidos = pedidosDAO.listar();
+            List<Pedido> pedidos = new ArrayList<>();
 
-            if (pedidos.isEmpty()) { throw new ServiceException("No hay pedidos registrados en la base de datos"); }
+            for (Pedido pedido: pedidos_ID){
+                Cliente cliente = clienteDAO.buscarPorID(pedido.getClienteID())
+                        .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
+
+                    pedidos.add(new Pedido( pedido.getId(),
+                                            cliente,
+                                            pedido.getProducto(),
+                                            pedido.getCantidad(),
+                                            pedido.getPrecio())
+                    );
+            }
 
             return pedidos;
 
@@ -57,13 +74,16 @@ public class PedidosService implements InterfazService<Pedido> {
     }
 
     @Override
-    public Optional<Pedido> buscarPorId(int id) throws ServiceException {
+    public Pedido buscarPorId(int id) throws ServiceException {
         try {
 
-            Optional<Pedido> pedido = pedidosDAO.buscarPorID(id);
-            if (pedido.isEmpty()) { throw new ServiceException("No existe el pedido con id: "+ id); }
+            Pedido pedido_id = pedidosDAO.buscarPorID(id)
+                    .orElseThrow(() -> new ServiceException("Pedido no existe"));
 
-            return pedido;
+            Cliente cliente = clienteDAO.buscarPorID(pedido_id.getClienteID())
+                    .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
+
+            return new Pedido(pedido_id.getId(), cliente, pedido_id.getProducto(), pedido_id.getCantidad(), pedido_id.getPrecio());
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo mostrar el pedido debido a un error.", e); }
     }

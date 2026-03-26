@@ -6,10 +6,13 @@ import util.Console;
 
 import java.util.Scanner;
 
-// TODO CLIENTE (tabla bbdd-model-gestor-dao-service)
+// TODO CLIENTE -> Comprobar que email no esta en la base de datos
+
 // TODO PRODUCTOS (tabla bbdd-model-gestor-dao-service)
 // TODO CUANDO TENGA LAS TABLAS DE PRODUCTOS Y CLIENTES MODIFICAR EL DAO DE PEDIDOS
 // TODO CAMBIAR CONSOLE Y VERIFICADOR METODOS RELACIONADOS CON NOMBRE CLIENTE Y PEDIDOS YA QUE NO DEBEMOS INGRESAR UN NOMBRE SI NO UNA FK
+// TODO VERIFICAR EMAIL NO REPETIDO
+// TODO CAMBIAR PRODUCTO STRING POR ID EN CONSOLE
 
 public class Main {
     public static void main(String[] args) {
@@ -38,7 +41,7 @@ public class Main {
                     3. Productos
                     0. Salir
             
-            Seleccione una opción del 0 al 3:  """;
+            Seleccione una opción del 0 al 3:""";
     }
 
     private static int ejecutarOpcion(Console console) {

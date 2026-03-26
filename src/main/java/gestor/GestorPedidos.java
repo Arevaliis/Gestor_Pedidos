@@ -1,5 +1,6 @@
 package gestor;
 
+import dao.ClientesDAO;
 import dao.PedidosDAO;
 import exception.ServiceException;
 import service.PedidosService;
@@ -15,7 +16,7 @@ public class GestorPedidos {
         boolean seguir = true;
 
         try (Connection connection = DataBaseConexion.getConnection()) {
-            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection));
+            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection), new ClientesDAO(connection));
 
             while (seguir) {
                 try {

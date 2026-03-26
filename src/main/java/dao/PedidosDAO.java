@@ -23,8 +23,8 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
 
         try(PreparedStatement insert = connection.prepareStatement(sql)){
 
-            insert.setString(1, pedido.getCliente()); // TODO EN UN FUTURO TENER EN CUENTA QUE DEBE SER UN ID CLIENTE
-            insert.setString(2, pedido.getProducto()); // TODO EN UN FUTURO TENER EN CUENTA QUE DEBE SER UN ID PRODUCTO
+            insert.setInt(1, pedido.getClienteID());
+            insert.setString(2, pedido.getProducto());  // TODO EN UN FUTURO TENER EN CUENTA QUE DEBE SER UN ID PRODUCTO
             insert.setInt(3, pedido.getCantidad());
             insert.setDouble(4, pedido.getPrecio());
 
@@ -73,8 +73,8 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
             do{
                 pedidos.add( new Pedido(
                         resultado.getInt("id"),
-                        resultado.getString("cliente_id"), // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE CLIENTE
-                        resultado.getString("producto"), // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE PRODUCTO
+                        resultado.getInt("cliente_id"),
+                        resultado.getString("producto"),  // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE PRODUCTO
                         resultado.getInt("cantidad"),
                         resultado.getDouble("precio")
                         )
@@ -100,7 +100,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
 
                 pedido = new Pedido(
                         resultado.getInt("id"),
-                        resultado.getString("cliente_id"), // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE CLIENTE
+                        resultado.getInt("cliente_id"),
                         resultado.getString("producto"), // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE CLIENTE
                         resultado.getInt("cantidad"),
                         resultado.getDouble("precio")

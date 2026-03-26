@@ -23,10 +23,9 @@ public class Console {
         return respuesta.equals("S");
     }
 
-    // TODO DEBEMOS CAMBIAR EL METODO YA QUE NO PASAREMOS NOMBRE NI DE CLIENTE NI DE PRODUCTO AL SER UN FK
     public Pedido ingresarPedido() throws ServiceException {
         return new Pedido(
-                ingresarPalabra("Ingrese el nombre del cliente: "),
+                ingresarNumero("Ingrese el id del cliente: "),
                 ingresarPalabra("Ingrese el producto: "),
                 ingresarNumero("Ingrese la cantidad de producto: "),
                 ingresarDecimal("Ingrese el precio unitario del producto: "));

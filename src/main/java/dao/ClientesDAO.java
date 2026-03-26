@@ -83,18 +83,22 @@ public class ClientesDAO implements InterfazDAO<Cliente> {
 
     @Override
     public Optional<Cliente> buscarPorID(int id) throws DAOException {
-        String sql = "SELECT * FROM clientes";
+        String sql = "SELECT * FROM clientes WHERE id = ?";
         Cliente cliente;
 
-        try(PreparedStatement selectAll = connection.prepareStatement(sql);
-            ResultSet resultado = selectAll.executeQuery()) {
+        try(PreparedStatement select = connection.prepareStatement(sql)){
+            select.setInt(1, id);
 
-            if (! resultado.next()){ return Optional.empty(); }
-            cliente = new Cliente( resultado.getInt("id"),
-                                            resultado.getString("nombre"),
-                                            resultado.getString("email"));
+            try(ResultSet resultado = select.executeQuery()) {
 
-            return Optional.of(cliente);
+                if (! resultado.next()){ return Optional.empty(); }
+                cliente = new Cliente( resultado.getInt("id"),
+                        resultado.getString("nombre"),
+                        resultado.getString("email"));
+
+                return Optional.of(cliente);
+        }
+
 
         } catch (SQLException e){ throw new DAOException("DAO: Error en el listar cliente, revise la consulta o los datos.", e); }
     }

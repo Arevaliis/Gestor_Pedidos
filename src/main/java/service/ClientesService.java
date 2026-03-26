@@ -7,7 +7,6 @@ import model.Cliente;
 import model.InterfazService;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ClientesService implements InterfazService<Cliente> {
     private final ClientesDAO clientesDAO;
@@ -37,12 +36,10 @@ public class ClientesService implements InterfazService<Cliente> {
     }
 
     @Override
-    public Optional<Cliente> buscarPorId(int id) throws ServiceException {
+    public Cliente buscarPorId(int id) throws ServiceException {
         try {
-            Optional<Cliente> cliente = clientesDAO.buscarPorID(id);
-            if (cliente.isEmpty()) { throw new ServiceException("No existe el pedido con id: "+ id); }
-
-            return cliente;
+            return clientesDAO.buscarPorID(id)
+                    .orElseThrow(() -> new ServiceException("No existe el cliente"));
 
         }catch (DAOException e) { throw new ServiceException("SERVICE: No se pudo mostrar el cliente debido a un error.", e); }
     }
