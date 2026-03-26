@@ -19,7 +19,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
 
     @Override
     public void insertar (Pedido pedido) throws DAOException {
-        String sql = "INSERT INTO pedidos (cliente, producto, cantidad, precio) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO pedidos (cliente_id, producto, cantidad, precio) VALUES (?,?,?,?)";
 
         try(PreparedStatement insert = connection.prepareStatement(sql)){
 
