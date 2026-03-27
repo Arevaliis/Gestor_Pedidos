@@ -37,14 +37,6 @@ public class Pedido {
         this.precioTotal = cantidad * precio;
     }
 
-    public Pedido(Cliente cliente, String producto, int cantidad, double precio) {
-        this.cliente = cliente;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.precio = precio;
-        this.precioTotal = cantidad * precio;
-    }
-
     public int getId() {
         return id;
     }

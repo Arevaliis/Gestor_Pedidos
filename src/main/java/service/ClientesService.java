@@ -16,6 +16,9 @@ public class ClientesService implements InterfazService<Cliente> {
     @Override
     public void insertar(Cliente cliente) throws ServiceException {
         try{
+            List<String> emailClientes = listarTodos().stream().map(Cliente::getEmail).toList();
+            if (emailClientes.contains(cliente.getEmail())){ throw new ServiceException("El email ingresado ya existe"); }
+
             clientesDAO.insertar(cliente);
         } catch (DAOException e) { throw new ServiceException("SERVICE: No se pudo insertar el cliente debido a un error.", e); }
     }
@@ -30,6 +33,9 @@ public class ClientesService implements InterfazService<Cliente> {
 
     public void modificar(int id, String email) throws ServiceException {
         try {
+            List<String> emailClientes = listarTodos().stream().map(Cliente::getEmail).toList();
+            if (emailClientes.contains(email)){ throw new ServiceException("El email ingresado ya existe"); }
+
             clientesDAO.modificar(id, email);
 
         }catch (DAOException e) { throw new ServiceException("SERVICE: No se pudo modificar el cliente debido a un error.", e); }
