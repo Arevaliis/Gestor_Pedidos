@@ -2,6 +2,7 @@ package app;
 
 import gestor.GestorClientes;
 import gestor.GestorPedidos;
+import gestor.GestorProductos;
 import util.Console;
 
 import java.util.Scanner;
@@ -50,7 +51,7 @@ public class Main {
         switch (opc){
             case 1 -> GestorPedidos.ejecutarGestorPedidos(console);
             case 2 -> GestorClientes.ejecutarGestorClientes(console);
-            case 3 -> System.out.println("d");
+            case 3 -> GestorProductos.ejecutarGestorProductos(console);
 
 
             case 0 -> System.err.println("Saliendo...");

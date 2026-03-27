@@ -3,6 +3,7 @@ package util;
 import exception.ServiceException;
 import model.Cliente;
 import model.Pedido;
+import model.Producto;
 
 import java.util.Scanner;
 
@@ -38,6 +39,14 @@ public class Console {
         );
     }
 
+    public Producto ingresarProducto() throws ServiceException {
+        return new Producto(
+                ingresarPalabra("Ingrese el nombre producto: "),
+                ingresarDecimal("Ingrese el precio unitario del producto: "),
+                ingresarNumero("Ingrese la cantidad de producto: ")
+        );
+    }
+
     public String ingresarEmail() throws ServiceException  {
         System.out.print("Ingrese el email del cliente: ");
         return Verificador.verificarEmail(scanner.nextLine().trim().toLowerCase());
@@ -54,7 +63,7 @@ public class Console {
         return Verificador.verificarNumeroIngresado(scanner.nextLine().trim());
     }
 
-    private double ingresarDecimal(String mensaje) {
+    public double ingresarDecimal(String mensaje) {
         System.out.print(mensaje);
         return Verificador.verificarDecimalIngresado(scanner.nextLine().trim());
     }

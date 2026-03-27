@@ -24,7 +24,7 @@ public class GestorClientes {
                     if (opc == 0) { return; }
                     ejecutarOpcion(clientesService, opc, console);
 
-                    seguir = console.continuarGestorPedidos("¿Desea seguir en la sección de pedidos? S/N: ");
+                    seguir = console.continuarGestorPedidos("¿Desea seguir en la sección de clientes? S/N: ");
 
                 } catch (NumberFormatException e) { System.err.println("Por favor, ingrese un número.");
                 } catch (ServiceException e) { System.err.println(e.getMessage()); }
@@ -35,9 +35,9 @@ public class GestorClientes {
 
     private static String mostrarMensajeMenu(){
         return """
-            ================================
-               SISTEMA DE GESTIÓN PEDIDOS
-            ================================
+            ==================================
+                SISTEMA DE GESTIÓN CLIENTES
+            ==================================
             
                 1. Crear Cliente
                 2. Ver cliente por ID
@@ -46,7 +46,7 @@ public class GestorClientes {
                 5. Eliminar cliente
                 0. Salir
             
-            Seleccione una opción del 0 al 5:  """;
+            Seleccione una opción del 0 al 5:""";
     }
 
     private static void ejecutarOpcion(ClientesService clientesService, int opc, Console console) throws ServiceException {
