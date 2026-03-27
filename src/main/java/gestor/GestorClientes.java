@@ -44,9 +44,9 @@ public class GestorClientes {
                 3. Listar todos los clientes
                 4. Modificar cliente
                 5. Eliminar cliente
-                0. Salir
+                6. Salir
             
-            Seleccione una opción del 0 al 5:""";
+            Seleccione una opción del 1 al 6:""";
     }
 
     private static void ejecutarOpcion(ClientesService clientesService, int opc, Console console) throws ServiceException {
@@ -68,7 +68,7 @@ public class GestorClientes {
                 System.out.println("Cliente eliminado");
             }
 
-            case 0 -> System.err.println("Volviendo...");
+            case 6 -> System.err.println("Volviendo...");
             default -> System.err.println("Debe ingresar un número comprendido entre 0 y 5");
         }
     }

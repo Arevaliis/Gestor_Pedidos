@@ -3,7 +3,6 @@ package service;
 import dao.ProductosDAO;
 import exception.DAOException;
 import exception.ServiceException;
-import model.Cliente;
 import model.InterfazService;
 import model.Producto;
 

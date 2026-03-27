@@ -2,6 +2,7 @@ package gestor;
 
 import dao.ClientesDAO;
 import dao.PedidosDAO;
+import dao.ProductosDAO;
 import exception.ServiceException;
 import service.PedidosService;
 import util.Console;
@@ -16,7 +17,7 @@ public class GestorPedidos {
         boolean seguir = true;
 
         try (Connection connection = DataBaseConexion.getConnection()) {
-            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection), new ClientesDAO(connection));
+            PedidosService pedidosService = new PedidosService(new PedidosDAO(connection), new ClientesDAO(connection), new ProductosDAO(connection));
 
             while (seguir) {
                 try {
@@ -28,7 +29,9 @@ public class GestorPedidos {
                     seguir = console.continuarGestorPedidos("¿Desea seguir en la sección de pedidos? S/N: ");
 
                 } catch (NumberFormatException e) { System.err.println("Por favor, ingrese un número.");
-                } catch (ServiceException e) { System.err.println(e.getMessage()); }
+                } catch (ServiceException e) { System.err.println(e.getMessage());
+                    e.printStackTrace();
+                }
             }
 
         } catch (SQLException e) { System.err.println("Error en la conexión a la base de datos: " + e.getMessage()); }
@@ -45,9 +48,9 @@ public class GestorPedidos {
                 3. Listar todos los pedidos
                 4. Modificar pedido
                 5. Eliminar pedido
-                0. Salir
+                6. Salir
             
-            Seleccione una opción del 0 al 5:  """;
+            Seleccione una opción del 1 al 6:""";
     }
 
     private static void ejecutarOpcion(PedidosService pedidosService, int opc, Console console) throws ServiceException {
@@ -69,7 +72,7 @@ public class GestorPedidos {
                 System.out.println("Pedido eliminado");
             }
 
-            case 0 -> System.err.println("Volviendo...");
+            case 6 -> System.err.println("Volviendo...");
             default -> System.err.println("Debe ingresar un número comprendido entre 0 y 5");
         }
     }

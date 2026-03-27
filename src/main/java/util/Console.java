@@ -24,12 +24,11 @@ public class Console {
         return respuesta.equals("S");
     }
 
-    public Pedido ingresarPedido() throws ServiceException {
+    public Pedido ingresarPedido() {
         return new Pedido(
                 ingresarNumero("Ingrese el id del cliente: "),
-                ingresarPalabra("Ingrese el producto: "),
-                ingresarNumero("Ingrese la cantidad de producto: "),
-                ingresarDecimal("Ingrese el precio unitario del producto: "));
+                ingresarNumero("Ingrese el id del producto: "),
+                ingresarNumero("Ingrese la cantidad de producto: "));
     }
 
     public Cliente ingresarCliente() throws ServiceException {

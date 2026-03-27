@@ -44,9 +44,9 @@ public class GestorProductos {
                 3. Listar todos los productos
                 4. Modificar producto
                 5. Eliminar producto
-                0. Salir
+                6. Salir
             
-            Seleccione una opción del 0 al 5:""";
+            Seleccione una opción del 1 al 6:""";
     }
 
     private static void ejecutarOpcion(ProductosService productosService, int opc, Console console) throws ServiceException {
@@ -68,7 +68,7 @@ public class GestorProductos {
                 System.out.println("Producto eliminado");
             }
 
-            case 0 -> System.err.println("Volviendo...");
+            case 6 -> System.err.println("Volviendo...");
             default -> System.err.println("Debe ingresar un número comprendido entre 0 y 5");
         }
     }

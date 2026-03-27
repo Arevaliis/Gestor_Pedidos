@@ -19,14 +19,15 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
 
     @Override
     public void insertar (Pedido pedido) throws DAOException {
-        String sql = "INSERT INTO pedidos (cliente_id, producto, cantidad, precio) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO pedidos (cliente_id, producto_id, cantidad, precio, total) VALUES (?,?,?,?,?)";
 
         try(PreparedStatement insert = connection.prepareStatement(sql)){
 
             insert.setInt(1, pedido.getClienteID());
-            insert.setString(2, pedido.getProducto());  // TODO EN UN FUTURO TENER EN CUENTA QUE DEBE SER UN ID PRODUCTO
+            insert.setInt(2, pedido.getProductoID());
             insert.setInt(3, pedido.getCantidad());
             insert.setDouble(4, pedido.getPrecio());
+            insert.setDouble(5, pedido.getPrecioTotal());
 
             int filas = insert.executeUpdate();
             if (filas == 0) { throw new DAOException("DAO: No se ha completado la inserción del pedido"); }
@@ -74,7 +75,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
                 pedidos.add( new Pedido(
                         resultado.getInt("id"),
                         resultado.getInt("cliente_id"),
-                        resultado.getString("producto"),  // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE PRODUCTO
+                        resultado.getInt("producto_id"),
                         resultado.getInt("cantidad"),
                         resultado.getDouble("precio")
                         )
@@ -101,7 +102,7 @@ public class PedidosDAO implements InterfazDAO<Pedido> {
                 pedido = new Pedido(
                         resultado.getInt("id"),
                         resultado.getInt("cliente_id"),
-                        resultado.getString("producto"), // TODO EN UN FUTURO CAMBIAR POR INSTANCIA DE CLIENTE
+                        resultado.getInt("producto_id"),
                         resultado.getInt("cantidad"),
                         resultado.getDouble("precio")
                 );

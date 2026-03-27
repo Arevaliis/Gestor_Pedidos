@@ -7,13 +7,7 @@ import util.Console;
 
 import java.util.Scanner;
 
-// TODO CLIENTE -> Comprobar que email no esta en la base de datos
-// TODO PRODUCTOS (tabla bbdd-model-gestor-dao-service)
-// TODO CUANDO TENGA LAS TABLAS DE PRODUCTOS Y CLIENTES MODIFICAR EL DAO DE PEDIDOS
-// TODO CAMBIAR CONSOLE Y VERIFICADOR METODOS RELACIONADOS CON NOMBRE CLIENTE Y PEDIDOS YA QUE NO DEBEMOS INGRESAR UN NOMBRE SI NO UNA FK
-
-// TODO CAMBIAR PRODUCTO STRING POR ID EN CONSOLE
-// TODO PRECIO NO DEBE INGRESARSE SI NO BUSCARLO DENTRO DE PRODUCTOS
+// TODO DEBEREMOS MODIFICAR STOCK CUANDO HAGAMOS UN NUEVO PEDIDO
 
 public class Main {
     public static void main(String[] args) {
@@ -40,9 +34,9 @@ public class Main {
                     1. Pedidos
                     2. Clientes
                     3. Productos
-                    0. Salir
+                    4. Salir
             
-            Seleccione una opción del 0 al 3:""";
+            Seleccione una opción del 1 al 4:""";
     }
 
     private static int ejecutarOpcion(Console console) {
@@ -54,7 +48,7 @@ public class Main {
             case 3 -> GestorProductos.ejecutarGestorProductos(console);
 
 
-            case 0 -> System.err.println("Saliendo...");
+            case 4 -> System.err.println("Saliendo...");
             default -> System.err.println("Debe ingresar un número comprendido entre 0 y 3");
         }
 

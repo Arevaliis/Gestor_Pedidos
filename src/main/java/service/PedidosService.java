@@ -2,11 +2,13 @@ package service;
 
 import dao.ClientesDAO;
 import dao.PedidosDAO;
+import dao.ProductosDAO;
 import exception.DAOException;
 import exception.ServiceException;
 import model.Cliente;
 import model.InterfazService;
 import model.Pedido;
+import model.Producto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,17 +16,23 @@ import java.util.List;
 public class PedidosService implements InterfazService<Pedido> {
     private final PedidosDAO pedidosDAO;
     private final ClientesDAO clienteDAO;
+    private final ProductosDAO productosDAO;
 
-    public PedidosService(PedidosDAO pedidosDAO, ClientesDAO clientesDAO) {
+    public PedidosService(PedidosDAO pedidosDAO, ClientesDAO clientesDAO, ProductosDAO productosDAO) {
         this.pedidosDAO = pedidosDAO;
         this.clienteDAO = clientesDAO;
+        this.productosDAO = productosDAO;
     }
 
     public void insertar(Pedido pedido) throws ServiceException{
 
         try{
+            Producto producto = productosDAO.buscarPorID(pedido.getProductoID())
+                    .orElseThrow(() -> new ServiceException("Producto no encontrado"));
 
-            pedidosDAO.insertar(pedido); // TODO DEBEREMOS MODIFICAR LA PARTE DE PRODUCTO
+            pedido.setPrecio(producto.getPrecio());
+
+            pedidosDAO.insertar(pedido);
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo insertar el pedido debido a un error.", e); }
     }
@@ -60,9 +68,12 @@ public class PedidosService implements InterfazService<Pedido> {
                 Cliente cliente = clienteDAO.buscarPorID(pedido.getClienteID())
                         .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
 
+                Producto producto = productosDAO.buscarPorID(pedido.getProductoID())
+                        .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
+
                     pedidos.add(new Pedido( pedido.getId(),
                                             cliente,
-                                            pedido.getProducto(),
+                                            producto,
                                             pedido.getCantidad(),
                                             pedido.getPrecio())
                     );
@@ -83,7 +94,10 @@ public class PedidosService implements InterfazService<Pedido> {
             Cliente cliente = clienteDAO.buscarPorID(pedido_id.getClienteID())
                     .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
 
-            return new Pedido(pedido_id.getId(), cliente, pedido_id.getProducto(), pedido_id.getCantidad(), pedido_id.getPrecio());
+            Producto producto = productosDAO.buscarPorID(pedido_id.getProductoID())
+                    .orElseThrow(() -> new ServiceException("Cliente no encontrado"));
+
+            return new Pedido(pedido_id.getId(), cliente, producto, pedido_id.getCantidad(), pedido_id.getPrecio());
 
         } catch (DAOException e){ throw new ServiceException("SERVICE: No se pudo mostrar el pedido debido a un error.", e); }
     }
